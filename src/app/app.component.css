@@ -8,7 +8,14 @@
 
 .bar{
     background-color: #252B43;
+    font-family: 'Are You Serious', cursive;
+    font-size: xx-large;
+}
 
+.texto{
+    font-family: 'Are You Serious', cursive;
+    font-size: 45px;
+    color: #ffff1a;
 }
 
 @media (max-width: 600px) {

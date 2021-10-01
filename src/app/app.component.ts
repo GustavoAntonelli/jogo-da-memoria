@@ -10,7 +10,8 @@ import { ResetComponent } from './reset/reset.component';
 })
 export class AppComponent {
   
-  
+  aux = 0
+
   cardImages = [
     'HlI03bNHhBI',
     'G2Xr3yuE1hU',
@@ -25,7 +26,42 @@ export class AppComponent {
     '46TvM-BVrRI',
     'R1oSj2m-7Ks',
     'rW-I87aPY5Y'
+  ];
+
+  cardImages3 = [
+    "-dtKoaHpi9M",
+    "mwwRDU_ekjw",
+    "8piaMv-7Idc",
+    "ngbQ2aRMYYQ",
+    "jDkn6mwqJVU"
+  ];
+
+  cardImages4 = [
+    "Z66JM_4wleU",
+    "KIhOwnglzso",
+    "lg5TpyNO5Wg",
+    "dIqyK9xE5mM",
+    "m6nMESbDVeY"
+
   ]
+
+  cardImages5 = [
+    "V4Mo8UYKRvY",
+    "FRJamIO-TB0",
+    "Xg_PBo-6rsE",
+    "5APBLfC2hUs",
+    "G_oWb_hcfx8"
+  ]
+
+  cardImages6 = [
+    "mvGVZPnVd-g",
+    "RQIwA-zOlGg",
+    "4gyYf1ItdHI",
+    "h8T1Wa4u7oU",
+    "nbcQn8KURa4"
+  ]
+
+  Ci = [this.cardImages, this.cardImages2, this.cardImages3, this.cardImages4, this.cardImages5, this.cardImages6]
 
   cards: Carta[] = [];
 
@@ -33,7 +69,7 @@ export class AppComponent {
 
   matchedCount = 0;
 
-  shuffleArray(anArray: any[]): any[] {
+  embaralhaArray(anArray: any[]): any[] {
     return anArray.map(a => [Math.random(), a])
       .sort((a, b) => a[0] - b[0])
       .map(a => a[1]);
@@ -42,14 +78,16 @@ export class AppComponent {
   constructor(private dialog: MatDialog) {
 
   }
+  
 
   ngOnInit(): void {
-    this.setupCards();
+    this.inicializaCards();
   }
 
-  setupCards(): void {
+  inicializaCards(): void {
     this.cards = [];
-    this.cardImages.forEach((image) => {
+    this.Ci[this.aux].forEach((image) => {
+      console.log(`valor do array de imagens ${this.aux}`)
       const cardData: Carta = {
         imageId: image,
         state: 'default'
@@ -60,27 +98,14 @@ export class AppComponent {
 
     });
 
-    this.cards = this.shuffleArray(this.cards);
+    this.cards = this.embaralhaArray(this.cards);
+
+
+    console.log(`valor do setupCards ${this.aux}`)
   }
 
-  setupCards2(): void {
-    this.cards = [];
-    this.cardImages2.forEach((image) => {
-      const cardData: Carta = {
-        imageId: image,
-        state: 'default'
-      };
 
-      this.cards.push({ ...cardData });
-      this.cards.push({ ...cardData });
-
-
-    });
-
-    this.cards = this.shuffleArray(this.cards);
-  }
-
-  cardClicked(index: number): void {
+  cardClicado(index: number): void {
     const cardInfo = this.cards[index];
 
     if (cardInfo.state === 'default' && this.flippedCards.length < 2) {
@@ -88,7 +113,7 @@ export class AppComponent {
       this.flippedCards.push(cardInfo);
 
       if (this.flippedCards.length > 1) {
-        this.checkForCardMatch();
+        this.SeDerMatch();
       }
 
     } else if (cardInfo.state === 'flipped') {
@@ -98,12 +123,12 @@ export class AppComponent {
     }
   }
 
-  checkForCardMatch(): void {
+  SeDerMatch(): void {
     setTimeout(() => {
-      const cardOne = this.flippedCards[0];
-      const cardTwo = this.flippedCards[1];
-      const nextState = cardOne.imageId === cardTwo.imageId ? 'matched' : 'default';
-      cardOne.state = cardTwo.state = nextState;
+      const cardUm = this.flippedCards[0];
+      const cardDois = this.flippedCards[1];
+      const nextState = cardUm.imageId === cardDois.imageId ? 'matched' : 'default';
+      cardUm.state = cardDois.state = nextState;
 
       this.flippedCards = [];
 
@@ -116,6 +141,7 @@ export class AppComponent {
           });
 
           dialogRef.afterClosed().subscribe(() => {
+            console.log(`valor da variavel antes de entrar no reset ${this.aux}`)
             this.restart();
           });
         }
@@ -125,20 +151,34 @@ export class AppComponent {
   }
   
 
-  
-
   restart(): void {
     this.matchedCount = 0;
-    if(this.cardImages2){
-      console.log('muda para setup 1')
-      return this.setupCards()
-    }
-    else{
-      console.log('muda para setup 2')
-      this.setupCards2();
-    }
-    
-  }
 
+    if(this.aux == 0){
+      this.aux = 1
+    }
+
+    else if(this.aux == 1){
+      this.aux = 2;
+    }
+
+    else if(this.aux == 2){
+      this.aux = 3;
+    }
+
+    else if(this.aux == 3){
+      this.aux = 4;
+    }
+
+    else if(this.aux == 4){
+      this.aux = 5;
+    }
+
+    else if(this.aux == 5){
+      this.aux = 0;
+    }
+
+    this.inicializaCards()
+  }
 
 }
