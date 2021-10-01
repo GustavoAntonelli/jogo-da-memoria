@@ -1,0 +1,18 @@
+.grid {
+    display: grid;
+    grid-template-columns: repeat(5, 150px);
+    gap: 80px;
+
+    justify-content: center;
+}
+
+.bar{
+    background-color: #252B43;
+
+}
+
+@media (max-width: 600px) {
+    .grid {
+        grid-template-columns: repeat(2, 150px);
+    }
+}
