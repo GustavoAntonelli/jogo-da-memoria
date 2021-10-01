@@ -2,7 +2,6 @@
     display: grid;
     grid-template-columns: repeat(5, 150px);
     gap: 80px;
-
     justify-content: center;
 }
 
@@ -10,12 +9,23 @@
     background-color: #252B43;
     font-family: 'Are You Serious', cursive;
     font-size: xx-large;
+    display: flex;
+    height: 70px;
+    justify-content: space-between;
 }
 
 .texto{
     font-family: 'Are You Serious', cursive;
     font-size: 45px;
     color: #ffff1a;
+    margin-bottom: 30px;
+}
+
+.contador{
+    font-family: 'Are You Serious', cursive;
+    font-size: 25px;
+    color: #ffff1a;
+    margin-bottom: 30px;
 }
 
 @media (max-width: 600px) {

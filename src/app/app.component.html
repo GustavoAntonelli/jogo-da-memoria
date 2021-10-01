@@ -1,11 +1,24 @@
 <mat-toolbar color="primary" class="text-center bar">
   Jogo da Memoria
+
 </mat-toolbar>
+
 <div class="p-16">
-  <p class="text-center texto">Clique para virar uma carta. Você só poderá virar duas cartas por vez !</p>
-    <div class="grid p-32">
-      <app-cartas *ngFor="let c of cards; let idx=index" [data]="c" (cardClicked)="cardClicado(idx)">  
-      </app-cartas>
-    </div>
+
+  <p class="text-center texto">
+    Clique para virar uma carta. Você só poderá virar duas cartas por vez !
+  </p>
+
+  <div class="text-center contador" *ngIf="clicks >= 0">
+    Contagem de clicks {{clicks}}
+  </div>
+
+  <div class="grid p-32">
+    <app-cartas *ngFor="let c of cards; let idx=index" [data]="c" (cardClicked)="cardClicado(idx)">  
+    </app-cartas>
+  </div>
+
+  
+  
 </div>
 

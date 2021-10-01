@@ -11,6 +11,7 @@ import { ResetComponent } from './reset/reset.component';
 export class AppComponent {
   
   aux = 0
+  clicks = 0
 
   cardImages = [
     'HlI03bNHhBI',
@@ -86,6 +87,7 @@ export class AppComponent {
 
   inicializaCards(): void {
     this.cards = [];
+    this.clicks = 0
     this.Ci[this.aux].forEach((image) => {
       console.log(`valor do array de imagens ${this.aux}`)
       const cardData: Carta = {
@@ -107,6 +109,7 @@ export class AppComponent {
 
   cardClicado(index: number): void {
     const cardInfo = this.cards[index];
+    this.clicks++;
 
     if (cardInfo.state === 'default' && this.flippedCards.length < 2) {
       cardInfo.state = 'flipped';
@@ -153,6 +156,7 @@ export class AppComponent {
 
   restart(): void {
     this.matchedCount = 0;
+    this.clicks = 0;
 
     if(this.aux == 0){
       this.aux = 1
